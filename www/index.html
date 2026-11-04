@@ -350,7 +350,7 @@ try { uid = localStorage.getItem('uid') || ''; if (!uid) { uid = crypto.randomUU
 function flush() {
   if (!STATS_URL || !pending.length) return;
   const body = JSON.stringify({ uid, events: pending.splice(0) });
-  try { fetch(STATS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body }); } catch (e) { /* בלי סטטיסטיקה */ }
+  try { fetch(STATS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body }).catch(() => {}); } catch (e) { /* בלי סטטיסטיקה */ }
 }
 function track(ev, now) {
   if (!STATS_URL) return;
@@ -451,6 +451,9 @@ $('bViper').onclick = () => answer('zefa');
 $('bZaaman').onclick = () => answer('zaaman');
 $('qnext').onclick = next;
 $('qagain').onclick = () => start(cur);
+// כשהאפליקציה מאושרת בחנות: למלא את הכתובת, והכפתור יהפוך לפעיל ("דרגו אותנו באפסטור").
+const RATE_URL = '';
+if (RATE_URL) { const r = $('rate'); r.disabled = false; r.textContent = 'דרגו אותנו באפסטור'; r.onclick = () => window.open(RATE_URL, '_blank'); }
 const shareUrl = () => location.href.split('#')[0];
 const shareText = () => `קיבלתי ${score} מתוך ${order.length} בחידון "האם זה נחש צפע?" נסו גם אתם`;
 $('share').onclick = async () => {
