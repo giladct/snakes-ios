@@ -277,7 +277,7 @@ header.top { background: url(img/skin.jpg) center / 420px auto; box-shadow: 0 6p
 </section>
 
 <footer id="foot">
-  <strong>קרדיט: התמונות והסרטונים באתר הם של <a href="https://www.facebook.com/share/1FbjqLZnAA/" target="_blank" rel="noopener">זהר להט (הלוכדת הירוקה)</a>.</strong> תמונות מ־Wikimedia Commons מסומנות בקרדיט נפרד, ראו <a href="credits.html">קרדיטים ורישיונות</a>.
+  <strong>קרדיט: התמונות והסרטונים באתר הם של <a href="https://www.facebook.com/share/1FbjqLZnAA/" target="_blank" rel="noopener">זהר להט (הלוכדת הירוקה)</a>.</strong> תמונות מ־Wikimedia Commons מסומנות בקרדיט נפרד, ראו <a href="credits.html">קרדיטים ורישיונות</a> · <a href="privacy.html">מדיניות פרטיות</a>.
 </footer>
 
 </div>
@@ -344,7 +344,7 @@ let order, idx, score, answered, cur;
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 
 // סטטיסטיקה אנונימית לגיליון גוגל: מזהה אקראי במכשיר, בלי שם ובלי פרטים אישיים. כתובת ריקה = כבוי.
-const STATS_URL = '';
+const STATS_URL = 'https://script.google.com/macros/s/AKfycbzlMZkiKGGzRN3SspKyYGOgRsOEUf9LaF8uRB0Gr_EehGc1_rb9132gzwsWLU7AIJL0dA/exec';
 let uid = '', run = '', pending = [];
 try { uid = localStorage.getItem('uid') || ''; if (!uid) { uid = crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now(); localStorage.setItem('uid', uid); } } catch (e) { uid = 'na'; }
 function flush() {

@@ -4,3 +4,11 @@ ios/App/build
 ios/App/DerivedData
 .DS_Store
 *.xcuserstate
+asc.js
+mk-bundle.js
+tools/
+tools-inspect.js
+tools-ref.js
+tools-meta.js
+tools-age.js
+tools-shots.js
