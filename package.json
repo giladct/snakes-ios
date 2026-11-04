@@ -1,0 +1,14 @@
+{
+  "name": "snakes-ios",
+  "version": "1.0.0",
+  "description": "נחש צפע? - iOS wrapper (Capacitor) for https://giladct.github.io/snakes/",
+  "private": true,
+  "scripts": {
+    "sync-web": "node sync-web.js"
+  },
+  "dependencies": {
+    "@capacitor/cli": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
+    "@capacitor/ios": "^8.5.1"
+  }
+}

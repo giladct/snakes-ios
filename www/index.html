@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>האם זה נחש צפע? חידון</title>
+<meta name="description" content="חידון זיהוי: האם זה צפע (ארסי) או זעמן מטבעות (לא מסוכן)? שלושה חידונים של 20 שאלות מתמונות וסרטונים מהשטח.">
+<style>
+  @font-face { font-family: "Heebo"; font-weight: 100 900; font-display: swap; src: url(fonts/heebo-he.woff2) format("woff2");
+    unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+  @font-face { font-family: "Heebo"; font-weight: 100 900; font-display: swap; src: url(fonts/heebo-lat.woff2) format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+FEFF; }
+
+  :root {
+    --bg: #f4f1ea; --ink: #1a2b22; --muted: #4a5a50; --rule: #1a2b22; --hair: #d3cdbd; --yellow: #e2b56d; --on-yellow: #1a2b22; --head: #1a2b22; --on-head: #f4f1ea; --green: #496b50; --rust: #b84c40;
+    --serif: "Heebo", system-ui, "Segoe UI", Arial, sans-serif; --sans: "Heebo", system-ui, "Segoe UI", Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #101a15; --ink: #f4f1ea; --muted: #a9b5ac; --rule: #f4f1ea; --hair: #2f4237; --green: #6f9b78; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.55; -webkit-text-size-adjust: 100%; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px 56px; }
+  a { color: inherit; }
+  .hidden { display: none; }
+
+  /* masthead */
+  header.top { background: var(--head); color: var(--on-head); border-bottom: 4px solid var(--yellow); }
+  header.top .in { max-width: 720px; margin: 0 auto; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  header.top h1 { margin: 0; font-family: var(--serif); font-weight: 800; font-size: clamp(1.45rem, 6.2vw, 2.4rem); line-height: 1.05; letter-spacing: -.01em; white-space: nowrap; }
+  .back { flex: none; padding: 6px 12px; background: var(--yellow); color: #1a2b22; text-decoration: none; font-weight: 800; font-size: .85rem; }
+  .back:hover { background: #f4f1ea; color: #1a2b22; }
+
+
+  /* intro */
+  .hero { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 14px 0 0; }
+  .herolead { margin: 0; font-family: var(--serif); font-weight: 800; font-size: clamp(1.6rem, 7vw, 2.4rem); line-height: 1.25; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; }
+  .pair figure { margin: 0; }
+  .pair img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border: 3px solid var(--rule); filter: brightness(1.2); }
+  .pair figcaption { font-family: var(--serif); font-weight: 800; font-size: 1.2rem; padding-top: 4px; }
+  .next.go.alt { background: transparent; color: var(--ink); margin-top: 0; }
+  .next.go.alt:hover { background: var(--ink); color: var(--bg); }
+  .next.go { display: block; width: 100%; text-align: center; padding: 15px; font-size: 1.35rem; margin-top: 8px; }
+  #introview > .next.go { margin-top: 18px; }
+
+  .pickh { margin-top: 24px; border-top: 0; }
+  header.top.compact .in { padding: 8px 16px 14px; }
+  header.top.compact h1 { font-size: 1.7rem; padding: 2px 12px 5px; border-width: 3px; border-radius: 22px; box-shadow: 0 4px 0 var(--ink); }
+  .qask { margin: 14px 0 0; text-align: center; font-family: var(--serif); font-size: 1.35rem; }
+  .herocredit { margin: -4px 0 0; text-align: center; font-size: .72rem; color: var(--muted); }
+  .pickask { text-align: center; font-family: var(--serif); font-size: 1.3rem; margin: 6px 0 14px; }
+  .pickno { text-align: center; margin: 0 0 14px; }
+  .next.small { font-size: 1rem; padding: 6px 18px; box-shadow: 0 3px 0 var(--ink); background: #fff; }
+  .picks { display: grid; gap: 10px; margin-top: 12px; }
+  .pick { display: flex; justify-content: space-between; align-items: baseline; padding: 18px 16px; border: 3px solid var(--rule); text-decoration: none; }
+  .pick strong { font-family: var(--serif); font-weight: 800; font-size: 1.5rem; }
+  .pick span { font-weight: 700; color: var(--muted); }
+  .pick:hover { background: var(--yellow); color: #1a2b22; }
+  .pick:hover span { color: #1a2b22; }
+  .love { margin-top: 28px; padding-top: 12px; border-top: 3px solid var(--green); }
+  .sharep { margin: 0 0 4px; font-family: var(--serif); font-size: 1.15rem; }
+  .love h3 { margin: 0 0 10px; font-family: var(--serif); font-weight: 800; font-size: 1.6rem; }
+  .love .next.go { margin-top: 8px; }
+  .love .next:disabled { opacity: .6; cursor: default; }
+  .love .next:disabled:hover { background: transparent; color: var(--ink); }
+  .qname { font-weight: 800; font-size: .85rem; color: var(--muted); margin-top: 14px; }
+  /* quiz */
+  .quiz { padding: 0; }
+  .qbar { display: flex; justify-content: space-between; align-items: baseline; font-size: .9rem; font-weight: 600; font-variant-numeric: tabular-nums; margin-bottom: 8px; }
+  #qnum { font-family: var(--serif); font-weight: 800; font-size: 1.15rem; }
+  #qscore { color: var(--muted); }
+  #qmedia { position: relative; height: min(46vh, 416px); background: #000; overflow: hidden; border: 3px solid var(--rule); }
+  .qimg { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .choices button { font-family: var(--serif); font-size: 1.5rem; font-weight: 800; padding: 8px; border: 3px solid var(--rule); background: transparent; color: var(--ink); cursor: pointer; border-radius: 0; }
+  .choices button:hover:not(:disabled) { background: var(--yellow); color: #1a2b22; }
+  .choices button:disabled { cursor: default; }
+  .choices button.right { background: var(--ink); color: var(--bg); }
+  .choices button.right::after { content: " ✓"; }
+  .choices button.wrong { background: repeating-linear-gradient(135deg, transparent 0 7px, var(--hair) 7px 9px); text-decoration: line-through; text-decoration-thickness: 3px; }
+  .choices button.wrong::after { content: " ✗"; }
+
+  .credit { position: absolute; left: 0; right: 0; bottom: 0; padding: 4px 8px; font-size: .78rem; background: rgba(0,0,0,.65); color: #fff; }
+  .credit.top { bottom: auto; top: 0; }
+  .credit a { color: #fff; }
+  .next { font-family: var(--sans); font-weight: 800; padding: 10px 22px; border: 3px solid var(--rule); background: var(--yellow); color: #1a2b22; cursor: pointer; border-radius: 0; text-decoration: none; display: inline-block; }
+  .next:hover { background: var(--ink); color: var(--bg); }
+  #qnext { display: block; width: 100%; margin-top: 8px; padding: 13px; font-size: 1.25rem; }
+  #qnext.hidden { display: none; }
+  .final { padding: 28px 0 8px; }
+  .final .score { direction: ltr; text-align: right; font-family: var(--serif); font-weight: 800; font-size: 4.5rem; line-height: 1; }
+  .final p { margin: 10px 0; }
+  .final .row { display: flex; gap: 8px; }
+  .final .next { font-size: 1.05rem; }
+
+  /* differences */
+  h2 { font-family: var(--serif); font-weight: 800; font-size: 1.9rem; line-height: 1.1; margin: 40px 0 6px; padding-top: 12px; border-top: 3px solid var(--green); }
+  .table { width: 100%; border-collapse: separate; border-spacing: 8px 0; table-layout: fixed; margin: 0 -8px; width: calc(100% + 16px); }
+  .table th, .table td { text-align: right; vertical-align: top; padding: 0; }
+  .table th.h-viper, .table th.h-zaaman { width: 50%; font-family: var(--serif); font-weight: 800; font-size: 1.35rem; padding: 6px 0 4px; border-bottom: 3px solid var(--green); }
+  .table tr.lbl th { font-family: var(--sans); font-weight: 800; font-size: .78rem; letter-spacing: .08em; color: var(--muted); padding: 16px 0 5px; }
+  .table .diff { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; filter: brightness(1.3) contrast(1.05) saturate(1.05); border: 0; }
+  .table td span { display: block; font-weight: 700; font-size: .92rem; line-height: 1.3; padding: 5px 0 0; }
+  .table tr.txt td { padding: 4px 0 0; font-weight: 700; font-size: 1rem; vertical-align: top; }
+  .tcredit { font-size: .78rem; color: var(--muted); margin: 14px 0 0; }
+  .lead { color: var(--muted); font-size: .95rem; margin: 12px 0 0; }
+
+  .warn { margin: 22px 0 0; padding: 12px 14px; border: 3px solid var(--rule); border-right: 14px solid var(--rust); font-size: .95rem; }
+  .warn strong { font-family: var(--serif); font-weight: 800; font-size: 1.15rem; background: var(--rust); color: #f4f1ea; padding: 0 5px; }
+
+  footer { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--hair); color: var(--muted); font-size: .8rem; }
+  footer strong { color: var(--ink); }
+@font-face { font-family: "Secular One"; font-weight: 400; font-display: swap; src: url(fonts/secular-one-hebrew.woff2) format("woff2"); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Secular One"; font-weight: 400; font-display: swap; src: url(fonts/secular-one-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: "Varela Round"; font-weight: 400; font-display: swap; src: url(fonts/varela-round-hebrew.woff2) format("woff2"); unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Varela Round"; font-weight: 400; font-display: swap; src: url(fonts/varela-round-latin.woff2) format("woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+  .prog { display: none; }
+
+/* ===== גרסה א: ג'ונגל (עיגולים, כפתורי גלולה, 3D) ===== */
+:root { --bg:#eaf7d9; --ink:#0f3d2a; --muted:#3f6b55; --rule:#0f3d2a; --hair:#b9dd9b; --yellow:#ffc933; --on-yellow:#0f3d2a; --head:#22a35a; --on-head:#fff; --green:#22a35a; --rust:#ff6b4a; --serif:"Secular One","Heebo",sans-serif; --sans:"Varela Round","Heebo",sans-serif; }
+body { background: var(--bg); background-image: radial-gradient(#d3edb7 2.5px, transparent 3px); background-size: 28px 28px; }
+.wrap { max-width: 560px; }
+
+header.top { background: var(--head); background-image: radial-gradient(circle at 50% 100%, rgba(255,255,255,.16) 0 11px, transparent 12px); background-size: 26px 18px; border-bottom: 0; border-radius: 0 0 34px 34px; box-shadow: 0 6px 0 var(--ink); position: relative; margin-bottom: 8px; }
+header.top h1 { color: #fff; text-shadow: 0 3px 0 var(--ink); font-weight: 400; letter-spacing: 0; }
+.back { border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 3px 0 var(--ink); font-family: var(--serif); font-weight: 400; font-size: .95rem; }
+.back:hover { background: #fff; }
+
+.herolead { font-weight: 400; text-align: center; color: var(--ink); }
+.pair { gap: 14px; margin-top: 6px; }
+.pair img { border-radius: 50%; border: 5px solid var(--ink); box-shadow: 0 7px 0 var(--ink); filter: none; }
+.pair figcaption { display: block; width: max-content; margin: -20px auto 0; position: relative; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; padding: 1px 18px; font-weight: 400; box-shadow: 0 3px 0 var(--ink); }
+.pair figure:last-child figcaption { background: #fff; }
+
+.next { border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 5px 0 var(--ink); font-family: var(--serif); font-weight: 400; transition: transform .08s, box-shadow .08s; background: var(--yellow); color: var(--ink); }
+.next:hover { background: #ffd861; color: var(--ink); }
+.next:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.next.go { font-size: 1.5rem; }
+.next.go.alt { background: #fff; color: var(--ink); }
+.next.go.alt:hover { background: #fff3c4; color: var(--ink); }
+
+.prog { display: block; height: 16px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; overflow: hidden; margin: 6px 0 12px; }
+.prog i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(45deg, var(--yellow) 0 10px, #ffdc7a 10px 20px); border-radius: 999px; transition: width .35s; }
+.qname { font-family: var(--serif); font-size: 1rem; color: var(--head); font-weight: 400; }
+.qside { display: flex; align-items: center; gap: 6px; }
+#qnum, #qscore, .snd { white-space: nowrap; }
+@media (max-width: 359px) { #qnum { font-size: .9rem; padding: 0 8px; } .snd { font-size: .7rem; padding: 2px 8px; } #qscore { font-size: .8rem; padding: 0 8px; } .qside { gap: 4px; } }
+.snd { font-family: var(--sans); font-size: .8rem; padding: 2px 12px; background: #fff; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px; cursor: pointer; }
+#qnum { background: #fff; border: 3px solid var(--ink); border-radius: 999px; padding: 0 14px; font-weight: 400; font-size: 1.05rem; }
+#qscore { background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; padding: 0 12px; color: var(--ink); font-family: var(--serif); font-weight: 400; }
+.qbar { align-items: center; }
+#qmedia { border: 5px solid var(--ink); border-radius: 28px; box-shadow: 0 7px 0 var(--ink); }
+.choices { gap: 12px; margin-top: 8px; }
+.choices button { background: #fff; border: 4px solid var(--ink); border-radius: 24px; box-shadow: 0 5px 0 var(--ink); font-family: var(--serif); font-weight: 400; font-size: clamp(1.05rem, 4.9vw, 1.4rem); padding: 12px 6px; line-height: 1.15; transition: transform .08s, box-shadow .08s; }
+.choices button:hover:not(:disabled) { background: #fff3c4; color: var(--ink); }
+.choices button:active:not(:disabled) { transform: translateY(4px); box-shadow: 0 1px 0 var(--ink); }
+.choices button.right { background: #2fb457; color: #fff; }
+.choices button.wrong { background: #e5484d; color: #fff; text-decoration: none; opacity: 1; }
+#qnext { margin-top: 16px; }
+.final .score { font-weight: 400; color: var(--yellow); -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; text-shadow: 0 5px 0 var(--ink); font-size: 6rem; text-align: center; }
+.final { text-align: center; }
+.final .row { justify-content: center; }
+.pickh { text-align: center; }
+.picks { gap: 16px; }
+.pick { border: 4px solid var(--ink); border-radius: 28px; box-shadow: 0 6px 0 var(--ink); background: #fff; padding: 22px 20px; transition: transform .08s, box-shadow .08s; }
+.pick { background: var(--yellow); }
+.pick:nth-child(n):hover { color: var(--ink); filter: brightness(1.06); }
+.pick:active { transform: translateY(5px); box-shadow: 0 1px 0 var(--ink); }
+.pick strong { font-weight: 400; font-size: 1.8rem; }
+.pick span { color: var(--ink); font-weight: 400; }
+.love { border-top: 0; text-align: center; background: #fff; border: 4px solid var(--ink); border-radius: 28px; padding: 14px 16px 18px; box-shadow: 0 6px 0 var(--ink); }
+.love h3 { font-weight: 400; font-size: 1.9rem; }
+
+h2 { display: table; margin: 22px auto 8px; padding: 4px 26px; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 4px 0 var(--ink); font-weight: 400; font-size: 1.7rem; }
+.table { border-spacing: 12px 0; margin: 0 -12px; width: calc(100% + 24px); }
+.table th.h-viper, .table th.h-zaaman { text-align: center; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 4px 0 var(--ink); font-weight: 400; padding: 3px 0; }
+.table tr.lbl th { text-align: center; color: var(--head); font-family: var(--serif); font-weight: 400; font-size: 1.15rem; letter-spacing: 0; padding: 6px 0 4px; line-height: 1.2; }
+.table .diff { border: 4px solid var(--ink); border-radius: 22px; box-shadow: 0 4px 0 var(--ink); filter: brightness(1.2); }
+.table td span, .table tr.txt td { text-align: center; font-weight: 400; }
+.table td span { padding-top: 6px; line-height: 1.15; }
+.warn { background: #fff3c4; border: 4px solid var(--ink); border-radius: 26px; box-shadow: 0 6px 0 var(--ink); padding: 16px 18px; }
+.warn strong { border-radius: 999px; padding: 1px 12px; font-weight: 400; }
+footer { border-top: 3px dotted var(--head); }
+
+
+header.top .in { flex-wrap: wrap; justify-content: center; padding: 14px 16px 22px; }
+header.top h1 { width: 100%; text-align: center; white-space: normal; order: 2; font-size: clamp(2.2rem, 10vw, 3.1rem); line-height: 1.1; }
+header.top .back { order: 1; align-self: flex-start; margin-bottom: 8px; }
+header.top .back.hidden { display: none; }
+header.top .in { padding-bottom: 26px; }
+header.top h1 { background: #fff; color: var(--ink); border: 4px solid var(--ink); border-radius: 30px; box-shadow: 0 6px 0 var(--ink); text-shadow: none; padding: 8px 14px 10px; }
+body { background: linear-gradient(rgba(234,247,217,.9), rgba(234,247,217,.9)), url(img/skin.jpg) center top / 460px; }
+header.top { background: url(img/skin.jpg) center / 420px auto; box-shadow: 0 6px 0 var(--ink); }
+</style>
+</head>
+<body>
+<header class="top" id="hdr"><div class="in">
+  <h1 id="ttl">האם זה נחש צפע?</h1>
+</div></header>
+<div class="wrap">
+
+<section id="introview">
+<div class="hero">
+  <p class="herolead">כאן תלמדו לזהות נחש צפע ולא להתבלבל עם זעמן מטבעות.</p>
+  <div class="pair">
+    <figure><img src="img/zefa1-jpg.jpg" alt="צפע"><figcaption>צפע</figcaption></figure>
+    <figure><img src="img/hero-zaaman.jpg" alt="זעמן מטבעות"><figcaption>זעמן מטבעות</figcaption></figure>
+  </div>
+  <a class="next go" href="#quiz">ישר לחידון ←</a>
+  <a class="next go alt" href="#guide">למדו עוד על ההבדלים ↓</a>
+</div>
+<h2 id="guide" style="scroll-margin-top:0">טבלת הבדלים</h2>
+<table class="table">
+  <tr><th class="h-viper">צפע</th><th class="h-zaaman">זעמן מטבעות</th></tr>
+  <tr class="lbl"><th colspan="2">ראש</th></tr>
+  <tr><td><img class="diff" src="img/diff/head-zefa.jpg" alt="ראש של צפע: רחב ומשולש" loading="lazy"><span>משולש, רחב מהצוואר</span></td>
+    <td><img class="diff" src="img/diff/head-zaaman.jpg" alt="ראש של זעמן מטבעות: צר ומוארך" loading="lazy"><span>מוארך, צר</span></td></tr>
+  <tr class="lbl"><th colspan="2">גוף</th></tr>
+  <tr><td><img class="diff" src="img/diff/body-zefa.jpg" alt="גוף עבה של צפע בדלי" loading="lazy"><span>עבה וקצר</span></td>
+    <td><img class="diff" src="img/diff/body-zaaman.jpg" alt="גוף דק וארוך של זעמן מטבעות בדלי" loading="lazy"><span>דק וארוך</span></td></tr>
+  <tr class="lbl"><th colspan="2">זנב</th></tr>
+  <tr><td><img class="diff" src="img/diff/tail-zefa.jpg" alt="זנב קצר של צפע" loading="lazy"><span>קצר</span></td>
+    <td><img class="diff" src="img/diff/tail-zaaman.jpg" alt="זנב ארוך ודק של זעמן מטבעות" loading="lazy"><span>ארוך ודק</span></td></tr>
+  <tr class="lbl"><th colspan="2">דוגמה</th></tr>
+  <tr><td><img class="diff" src="img/diff/pattern-zefa.jpg" alt="דוגמת זיגזג רציפה על צפע" loading="lazy"><span>זיגזג רציף לאורך הגב</span></td>
+    <td><img class="diff" src="img/diff/pattern-zaaman.jpg" alt="טבעות עגולות בשורה על זעמן מטבעות" loading="lazy"><span>כתמים עגולים/מרובעים בשורות</span></td></tr>
+  <tr class="lbl"><th colspan="2">אישון</th></tr>
+  <tr><td><img class="diff" src="img/diff/pupil-zefa.jpg" alt="עין של צפע עם אישון אנכי" loading="lazy"><span>אנכי</span></td>
+    <td><img class="diff" src="img/diff/pupil-zaaman.jpg" alt="עין של זעמן מטבעות עם אישון עגול" loading="lazy"><span>עגול</span></td></tr>
+  <tr class="lbl"><th colspan="2">התנהגות</th></tr>
+  <tr class="txt"><td>נשאר במקום, מתכווץ ומשמיע שריקה</td><td>בורח במהירות</td></tr>
+</table>
+
+<div class="warn">
+  <strong>בטיחות קודם:</strong> לא מתקרבים ולא תופסים נחש, גם אם נראה לכם שזה "סתם זעמן מטבעות". תמונה ממרחק עדיפה על זיהוי מקרוב.
+  נחש בתוך הבית או בגינה: מזמינים מוציא נחשים מורשה, או פונים לרשות הטבע והגנים (*3639).
+  נשיכה: מתרחקים, מקבעים את האיבר ומתקשרים למד"א (101). הדף הזה הוא עזר לימודי ולא תחליף לזיהוי של מומחה.
+</div>
+<a class="next go" href="#quiz">קחו אותי לחידון ←</a>
+</section>
+<section id="pickview" class="hidden">
+  <h2 class="pickh">בחרו חידון</h2>
+  <p class="pickask">האם אתה מוכן ומכיר את ההבדלים?</p>
+  <p class="pickno"><a class="next small" href="#guide">עוד לא? לטבלת ההבדלים ↓</a></p>
+  <div class="picks" id="picks"></div>
+</section>
+<section id="quizview" class="hidden">
+<div class="quiz" id="quizbox">
+  <div id="qplay">
+    <div class="qname" id="qname"></div>
+    <div class="qbar"><span id="qnum"></span><span class="qside"><button type="button" class="snd" id="snd"></button><span id="qscore"></span></span></div>
+    <div class="prog"><i id="progi"></i></div>
+    <div id="qmedia"></div>
+    <div class="choices">
+      <button id="bViper" data-a="zefa">צפע</button>
+      <button id="bZaaman" data-a="zaaman">זעמן מטבעות</button>
+    </div>
+    <button class="next hidden" id="qnext">הבא ←</button>
+    <div id="qfb"></div>
+  </div>
+  <div id="qend" class="final hidden">
+    <div class="score" id="qfinal"></div>
+    <p id="qmsg"></p>
+    <p><a class="next" id="qnextquiz" href="#quiz2">לחידון הבא ←</a></p>
+    <p class="row"><button class="next" id="qagain">שוב</button><a class="next" href="#quiz">לבחירת חידון</a></p>
+    <div class="love">
+      <h3>אהבת?</h3>
+      <p class="sharep">שתפו את התוצאה</p>
+      <a class="next go" id="wa" target="_blank" rel="noopener">שתפו בוואטסאפ</a>
+      <button class="next go alt" id="share">שתפו ברשתות החברתיות</button>
+      <button class="next go alt" id="rate" disabled>דרגו אותנו · בקרוב באפליקציה</button>
+    </div>
+  </div>
+</div>
+
+</section>
+
+<footer id="foot">
+  <strong>קרדיט: התמונות והסרטונים באתר הם של <a href="https://www.facebook.com/share/1FbjqLZnAA/" target="_blank" rel="noopener">זהר להט (הלוכדת הירוקה)</a>.</strong> תמונות מ־Wikimedia Commons מסומנות בקרדיט נפרד, ראו <a href="credits.html">קרדיטים ורישיונות</a>.
+</footer>
+
+</div>
+
+<script>
+// כל חידון = 20 שאלות: תמונות (pics) וסרטונים (vids). התשובה נקבעת לפי שם הקובץ (zefa = צפע, zaaman = זעמן).
+// כל החידונים באותה רמה (בכל אחד תערובת של קל, בינוני וקשה). חידון 1: הסרטונים בשאלות הזוגיות. בשאר החידונים הסרטונים מפוזרים באופן שווה.
+// כדי להוסיף חידון: מוסיפים אובייקט לרשימה (והקבצים לתיקיות img/ ו-video/).
+// תמונות שלא משובצות באף חידון (שמורות לחידון הבא): zefa8-png, zaaman22-jpg, zaaman23-jpg, zaaman25-jpg
+const QUIZZES = [
+  { name: 'חידון 1', vidsEven: true,
+    pics: ['zefa1-jpg','zefa6-png','zefa2-jpg','zefa11-png','zefa3-jpg','zaaman5-png','zaaman1-jpg','zaaman3-jpg','zaaman4-jpg','zaaman3-png'],
+    vids: ['zefa-night','zefa-pine','zefa-gravel','zefa-bush','zefa-climbing','zaaman-carpet','zaaman-box','zaaman-cup','zaaman-escape','zaaman-crawl'] },
+  { name: 'חידון 2',
+    pics: ['zefa14-jpg','zefa15-jpg','zefa19-jpg','zefa4-png','zefa3-png','zefa5-png','zefa7-png','zaaman13-png','zaaman6-png','zaaman7-png','zaaman8-png','zaaman9-png','zaaman11-png','zaaman10-png','zaaman21-jpg'],
+    vids: ['zefa-head','zefa-bucket','zefa-moving','zaaman-fabric','zaaman-vanish'] },
+  { name: 'חידון 3',
+    pics: ['zefa18-jpg','zefa17-jpg','zefa16-jpg','zefa9-png','zefa10-png','zefa12-png','zefa13-png','zaaman2-jpg','zaaman4-png','zaaman20-jpg','zaaman12-png','zaaman27-jpg','zaaman24-jpg','zaaman26-jpg','zaaman29-jpg'],
+    vids: ['zefa-box','zefa-white','zaaman-trans','zaaman-lid','zaaman-jar'] },
+];
+const ans = f => f.startsWith('zefa') ? 'zefa' : 'zaaman';
+const CREDITS = {
+ "zaaman29-jpg.jpg": {"by": "יערה כהן ווינקלר"},
+ "zaaman26-jpg.jpg": {
+  "by": "أمين (Amin)",
+  "lic": "CC BY-SA 4.0",
+  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Coluber_nummifer,_Palestine_001.jpg"
+ },
+ "zaaman27-jpg.jpg": {
+  "by": "יעקב",
+  "lic": "נחלת הכלל",
+  "licUrl": "https://commons.wikimedia.org/wiki/File:Snake_in_Jerusalem_area.JPG",
+  "page": "https://commons.wikimedia.org/wiki/File:Snake_in_Jerusalem_area.JPG"
+ },
+ "zefa16-jpg.jpg": {
+  "by": "ארבל לוי",
+  "lic": "CC BY-SA 4.0",
+  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_1.jpg"
+ },
+ "zefa17-jpg.jpg": {
+  "by": "ארבל לוי",
+  "lic": "CC BY-SA 4.0",
+  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_2.jpg"
+ },
+ "zefa18-jpg.jpg": {
+  "by": "ארבל לוי",
+  "lic": "CC BY-SA 4.0",
+  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_3.jpg"
+ },
+ "zefa19-jpg.jpg": {
+  "by": "ארבל לוי",
+  "lic": "CC BY-SA 4.0",
+  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_4.jpg"
+ },
+};
+const $ = id => document.getElementById(id);
+let order, idx, score, answered, cur;
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+// סטטיסטיקה אנונימית לגיליון גוגל: מזהה אקראי במכשיר, בלי שם ובלי פרטים אישיים. כתובת ריקה = כבוי.
+const STATS_URL = '';
+let uid = '', run = '', pending = [];
+try { uid = localStorage.getItem('uid') || ''; if (!uid) { uid = crypto.randomUUID ? crypto.randomUUID() : String(Math.random()).slice(2) + Date.now(); localStorage.setItem('uid', uid); } } catch (e) { uid = 'na'; }
+function flush() {
+  if (!STATS_URL || !pending.length) return;
+  const body = JSON.stringify({ uid, events: pending.splice(0) });
+  try { fetch(STATS_URL, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body }); } catch (e) { /* בלי סטטיסטיקה */ }
+}
+function track(ev, now) {
+  if (!STATS_URL) return;
+  pending.push(Object.assign({ t: Date.now(), run }, ev));
+  if (now || pending.length >= 5) flush();
+}
+document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+window.addEventListener('pagehide', flush);
+function start(n) {
+  cur = n;
+  run = Math.random().toString(36).slice(2, 10);
+  track({ type: 'start', quiz: n + 1 }, true);
+  const qz = QUIZZES[n];
+  const pics = shuffle(qz.pics.map(f => ({ src: 'img/' + f + '.jpg', a: ans(f) })));
+  const vids = shuffle(qz.vids.map(v => ({ src: 'video/' + v + '.mp4', video: true, a: ans(v) })));
+  const total = pics.length + vids.length;
+  const slots = new Set(qz.vidsEven ? vids.map((_, k) => 2 * k + 1) : vids.map((_, k) => Math.floor((k + 1) * total / (vids.length + 1))));
+  order = [];
+  for (let i = 0, p = 0, v = 0; i < total; i++) order.push(slots.has(i) ? vids[v++] : pics[p++]);
+  idx = 0; score = 0;
+  $('qname').textContent = qz.name;
+  $('foot').classList.remove('hidden');
+  $('qend').classList.add('hidden'); $('qplay').classList.remove('hidden');
+  show();
+}
+function show() {
+  answered = false;
+  const q = order[idx];
+  const m = document.createElement(q.video ? 'video' : 'img');
+  m.className = 'qimg'; m.src = q.src;
+  if (q.video) { m.muted = true; m.loop = true; m.autoplay = true; m.playsInline = true; m.controls = true; m.setAttribute('aria-label', 'סרטון נחש לזיהוי'); }
+  else m.alt = 'נחש לזיהוי';
+  $('qmedia').replaceChildren(m);
+  $('progi').style.width = (idx / order.length * 100) + '%';
+  $('qnum').textContent = `שאלה ${idx + 1} מתוך ${order.length}`;
+  $('qscore').textContent = `ניקוד: ${score}`;
+  $('qfb').replaceChildren();
+  const c = CREDITS[q.src.replace('img/', '')];
+  if (c) {
+    const d = document.createElement('div'); d.className = 'credit';
+    d.append('צילום: ');
+    if (!c.page) d.append(c.by);
+    else {
+      const a1 = document.createElement('a'); a1.href = c.page; a1.target = '_blank'; a1.rel = 'noopener'; a1.textContent = c.by; d.append(a1, ' · ');
+      const a2 = document.createElement('a'); a2.href = c.licUrl; a2.target = '_blank'; a2.rel = 'noopener'; a2.textContent = c.lic; d.append(a2);
+    }
+    if (q.video) d.classList.add('top');
+    $('qmedia').append(d);
+  }
+  $('qnext').classList.add('hidden');
+  [$('bViper'), $('bZaaman')].forEach(b => { b.disabled = false; b.className = ''; });
+}
+let actx, soundOn = true;
+try { soundOn = localStorage.getItem('snd') !== '0'; } catch (e) {}
+function tone(f, t, dur, type, vol, f2) {
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = type; o.frequency.setValueAtTime(f, t);
+  if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g); g.connect(actx.destination); o.start(t); o.stop(t + dur);
+}
+function beep(ok) {
+  if (!soundOn) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    const t = actx.currentTime;
+    if (ok) [[523.25, 0], [659.25, .09], [783.99, .18]].forEach(([f, d]) => tone(f, t + d, .25, 'sine', .25));
+    else tone(190, t, .3, 'sawtooth', .16, 100);
+  } catch (e) { /* בלי צליל */ }
+}
+const showSnd = () => { $('snd').textContent = soundOn ? 'צליל: פועל' : 'צליל: כבוי'; };
+$('snd').onclick = () => { soundOn = !soundOn; try { localStorage.setItem('snd', soundOn ? '1' : '0'); } catch (e) {} showSnd(); if (soundOn) beep(true); };
+showSnd();
+function answer(a) {
+  if (answered) return; answered = true;
+  const q = order[idx], ok = a === q.a;
+  if (ok) score++;
+  track({ type: 'answer', quiz: cur + 1, q: idx + 1, item: q.src.replace(/^.*\//, '').replace(/\.\w+$/, ''), ok: ok ? 1 : 0 });
+  beep(ok);
+  $('bViper').disabled = $('bZaaman').disabled = true;
+  (q.a === 'zefa' ? $('bViper') : $('bZaaman')).classList.add('right');
+  if (!ok) (a === 'zefa' ? $('bViper') : $('bZaaman')).classList.add('wrong');
+  $('qscore').textContent = `ניקוד: ${score}`;
+  $('qnext').textContent = idx === order.length - 1 ? 'לתוצאה ←' : 'הבא ←';
+  $('qnext').classList.remove('hidden');
+}
+function next() {
+  if (++idx < order.length) return show();
+  $('qplay').classList.add('hidden'); $('qend').classList.remove('hidden'); $('foot').classList.add('hidden');
+  track({ type: 'finish', quiz: cur + 1, score }, true);
+  $('qfinal').textContent = `${score} / ${order.length}`;
+  $('wa').href = 'https://wa.me/?text=' + encodeURIComponent(shareText() + ' ' + shareUrl());
+  $('share').textContent = 'שתפו ברשתות החברתיות';
+  $('qmsg').textContent = score >= order.length * .9 ? 'מצוין, עין חדה!' : score >= order.length * .6 ? 'לא רע. שווה לחזור על טבלת ההבדלים.' : 'זיהוי נחשים זה קשה. נסו שוב אחרי שתעברו על המדריך.';
+}
+$('bViper').onclick = () => answer('zefa');
+$('bZaaman').onclick = () => answer('zaaman');
+$('qnext').onclick = next;
+$('qagain').onclick = () => start(cur);
+const shareUrl = () => location.href.split('#')[0];
+const shareText = () => `קיבלתי ${score} מתוך ${order.length} בחידון "האם זה נחש צפע?" נסו גם אתם`;
+$('share').onclick = async () => {
+  try {
+    if (navigator.share) await navigator.share({ title: 'האם זה נחש צפע?', text: shareText(), url: shareUrl() });
+    else { await navigator.clipboard.writeText(shareText() + ' ' + shareUrl()); $('share').textContent = 'הטקסט והקישור הועתקו'; }
+  } catch (e) { /* המשתמש ביטל */ }
+};
+$('picks').replaceChildren(...QUIZZES.map((qz, i) => {
+  const a = document.createElement('a'); a.className = 'pick'; a.href = '#quiz' + (i + 1);
+  const t = document.createElement('strong'); t.textContent = qz.name;
+  const d = document.createElement('span'); d.textContent = `${qz.pics.length + qz.vids.length} שאלות`;
+  a.append(t, d); return a;
+}));
+function route() {
+  const h = location.hash, m = h.match(/^#quiz(\d+)$/), n = m ? +m[1] - 1 : -1, play = n >= 0 && n < QUIZZES.length, pick = h === '#quiz' || (m && !play);
+  $('introview').classList.toggle('hidden', play || pick);
+  $('pickview').classList.toggle('hidden', !pick);
+  $('quizview').classList.toggle('hidden', !play);
+  $('foot').classList.toggle('hidden', pick);
+  $('hdr').classList.toggle('compact', play);
+  $('ttl').textContent = play ? 'איזה נחש זה?' : 'האם זה נחש צפע?';
+  if (play) {
+    start(n);
+    const nx = $('qnextquiz'); nx.classList.toggle('hidden', n + 1 >= QUIZZES.length); nx.href = '#quiz' + (n + 2);
+  }
+  if (h === '#guide') $('guide').scrollIntoView();
+  else window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+route();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "appId": "snakes.myapp",
+  "appName": "נחש צפע?",
+  "webDir": "www",
+  "ios": {
+    "contentInset": "automatic",
+    "backgroundColor": "#1a4d2e"
+  }
+}
