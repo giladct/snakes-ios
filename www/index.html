@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>האם זה נחש צפע? חידון</title>
-<meta name="description" content="חידון זיהוי: האם זה צפע (ארסי) או זעמן מטבעות (לא מסוכן)? שלושה חידונים של 20 שאלות מתמונות וסרטונים מהשטח.">
+<meta name="description" content="חידון זיהוי: האם זה צפע (ארסי) או זעמן מטבעות (לא מסוכן)? שלושה חידונים של 18 שאלות מתמונות וסרטונים מהשטח.">
 <style>
   @font-face { font-family: "Heebo"; font-weight: 100 900; font-display: swap; src: url(fonts/heebo-he.woff2) format("woff2");
     unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
@@ -106,8 +106,6 @@
   .tcredit { font-size: .78rem; color: var(--muted); margin: 14px 0 0; }
   .lead { color: var(--muted); font-size: .95rem; margin: 12px 0 0; }
 
-  .warn { margin: 22px 0 0; padding: 12px 14px; border: 3px solid var(--rule); border-right: 14px solid var(--rust); font-size: .95rem; }
-  .warn strong { font-family: var(--serif); font-weight: 800; font-size: 1.15rem; background: var(--rust); color: #f4f1ea; padding: 0 5px; }
 
   footer { margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--hair); color: var(--muted); font-size: .8rem; }
   footer strong { color: var(--ink); }
@@ -130,8 +128,7 @@ header.top h1 { color: #fff; text-shadow: 0 3px 0 var(--ink); font-weight: 400; 
 .herolead { font-weight: 400; text-align: center; color: var(--ink); }
 .pair { gap: 14px; margin-top: 6px; }
 .pair img { border-radius: 50%; border: 5px solid var(--ink); box-shadow: 0 7px 0 var(--ink); filter: none; }
-.pair figcaption { display: block; width: max-content; margin: -20px auto 0; position: relative; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; padding: 1px 18px; font-weight: 400; box-shadow: 0 3px 0 var(--ink); }
-.pair figure:last-child figcaption { background: #fff; }
+.pair figcaption { display: block; width: max-content; margin: 14px auto 0; position: relative; background: none; border: 0; border-radius: 0; padding: 0; font-weight: 400; font-size: 1.3rem; color: var(--ink); box-shadow: none; }
 
 .next { border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 5px 0 var(--ink); font-family: var(--serif); font-weight: 400; transition: transform .08s, box-shadow .08s; background: var(--yellow); color: var(--ink); }
 .next:hover { background: #ffd861; color: var(--ink); }
@@ -143,12 +140,14 @@ header.top h1 { color: #fff; text-shadow: 0 3px 0 var(--ink); font-weight: 400; 
 .prog { display: block; height: 16px; border: 3px solid var(--ink); border-radius: 999px; background: #fff; overflow: hidden; margin: 6px 0 12px; }
 .prog i { display: block; height: 100%; width: 0; background: repeating-linear-gradient(45deg, var(--yellow) 0 10px, #ffdc7a 10px 20px); border-radius: 999px; transition: width .35s; }
 .qname { font-family: var(--serif); font-size: 1rem; color: var(--head); font-weight: 400; }
-.qside { display: flex; align-items: center; gap: 6px; }
+.qside { display: flex; align-items: center; gap: 14px; }
 #qnum, #qscore, .snd { white-space: nowrap; }
-@media (max-width: 359px) { #qnum { font-size: .9rem; padding: 0 8px; } .snd { font-size: .7rem; padding: 2px 8px; } #qscore { font-size: .8rem; padding: 0 8px; } .qside { gap: 4px; } }
-.snd { font-family: var(--sans); font-size: .8rem; padding: 2px 12px; background: #fff; color: var(--ink); border: 2px solid var(--ink); border-radius: 999px; cursor: pointer; }
-#qnum { background: #fff; border: 3px solid var(--ink); border-radius: 999px; padding: 0 14px; font-weight: 400; font-size: 1.05rem; }
-#qscore { background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; padding: 0 12px; color: var(--ink); font-family: var(--serif); font-weight: 400; }
+@media (max-width: 359px) { #qnum { font-size: .9rem; } .snd { font-size: .75rem; } #qscore { font-size: .8rem; } .qside { gap: 10px; } }
+.snd { display: inline-flex; align-items: center; justify-content: center; min-width: 40px; min-height: 40px; padding: 0; background: none; color: var(--ink); border: 0; border-radius: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.snd svg { display: block; }
+.snd.off { color: var(--muted); }
+#qnum { background: none; border: 0; padding: 0; font-weight: 400; font-size: 1.05rem; color: var(--ink); }
+#qscore { background: none; border: 0; padding: 0; color: var(--ink); font-family: var(--serif); font-weight: 400; }
 .qbar { align-items: center; }
 #qmedia { border: 5px solid var(--ink); border-radius: 28px; box-shadow: 0 7px 0 var(--ink); }
 .choices { gap: 12px; margin-top: 8px; }
@@ -172,15 +171,13 @@ header.top h1 { color: #fff; text-shadow: 0 3px 0 var(--ink); font-weight: 400; 
 .love { border-top: 0; text-align: center; background: #fff; border: 4px solid var(--ink); border-radius: 28px; padding: 14px 16px 18px; box-shadow: 0 6px 0 var(--ink); }
 .love h3 { font-weight: 400; font-size: 1.9rem; }
 
-h2 { display: table; margin: 22px auto 8px; padding: 4px 26px; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 4px 0 var(--ink); font-weight: 400; font-size: 1.7rem; }
+h2 { display: block; text-align: center; margin: 28px 0 10px; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; color: var(--ink); font-weight: 400; font-size: 1.8rem; }
 .table { border-spacing: 12px 0; margin: 0 -12px; width: calc(100% + 24px); }
-.table th.h-viper, .table th.h-zaaman { text-align: center; background: var(--yellow); border: 3px solid var(--ink); border-radius: 999px; box-shadow: 0 4px 0 var(--ink); font-weight: 400; padding: 3px 0; }
-.table tr.lbl th { text-align: center; color: var(--head); font-family: var(--serif); font-weight: 400; font-size: 1.15rem; letter-spacing: 0; padding: 6px 0 4px; line-height: 1.2; }
+.table th.h-viper, .table th.h-zaaman { text-align: center; background: none; border: 0; border-radius: 0; box-shadow: none; color: var(--ink); font-family: var(--serif); font-weight: 400; font-size: 1.3rem; padding: 3px 0; }
+.table tr.lbl th { text-align: center; color: var(--ink); font-family: var(--serif); font-weight: 400; font-size: 1.4rem; letter-spacing: 0; padding: 8px 0 4px; line-height: 1.2; }
 .table .diff { border: 4px solid var(--ink); border-radius: 22px; box-shadow: 0 4px 0 var(--ink); filter: brightness(1.2); }
 .table td span, .table tr.txt td { text-align: center; font-weight: 400; }
 .table td span { padding-top: 6px; line-height: 1.15; }
-.warn { background: #fff3c4; border: 4px solid var(--ink); border-radius: 26px; box-shadow: 0 6px 0 var(--ink); padding: 16px 18px; }
-.warn strong { border-radius: 999px; padding: 1px 12px; font-weight: 400; }
 footer { border-top: 3px dotted var(--head); }
 
 
@@ -189,7 +186,7 @@ header.top h1 { width: 100%; text-align: center; white-space: normal; order: 2; 
 header.top .back { order: 1; align-self: flex-start; margin-bottom: 8px; }
 header.top .back.hidden { display: none; }
 header.top .in { padding-bottom: 26px; }
-header.top h1 { background: #fff; color: var(--ink); border: 4px solid var(--ink); border-radius: 30px; box-shadow: 0 6px 0 var(--ink); text-shadow: none; padding: 8px 14px 10px; }
+header.top h1, header.top.compact h1 { background: none; color: #fff; border: 0; border-radius: 0; box-shadow: none; -webkit-text-stroke: 5px var(--ink); paint-order: stroke fill; text-shadow: 0 4px 0 var(--ink); padding: 8px 14px 10px; }
 body { background: linear-gradient(rgba(234,247,217,.9), rgba(234,247,217,.9)), url(img/skin.jpg) center top / 460px; }
 header.top { background: url(img/skin.jpg) center / 420px auto; box-shadow: 0 6px 0 var(--ink); }
 </style>
@@ -232,11 +229,6 @@ header.top { background: url(img/skin.jpg) center / 420px auto; box-shadow: 0 6p
   <tr class="txt"><td>נשאר במקום, מתכווץ ומשמיע שריקה</td><td>בורח במהירות</td></tr>
 </table>
 
-<div class="warn">
-  <strong>בטיחות קודם:</strong> לא מתקרבים ולא תופסים נחש, גם אם נראה לכם שזה "סתם זעמן מטבעות". תמונה ממרחק עדיפה על זיהוי מקרוב.
-  נחש בתוך הבית או בגינה: מזמינים מוציא נחשים מורשה, או פונים לרשות הטבע והגנים (*3639).
-  נשיכה: מתרחקים, מקבעים את האיבר ומתקשרים למד"א (101). הדף הזה הוא עזר לימודי ולא תחליף לזיהוי של מומחה.
-</div>
 <a class="next go" href="#quiz">קחו אותי לחידון ←</a>
 </section>
 <section id="pickview" class="hidden">
@@ -277,66 +269,30 @@ header.top { background: url(img/skin.jpg) center / 420px auto; box-shadow: 0 6p
 </section>
 
 <footer id="foot">
-  <strong>קרדיט: התמונות והסרטונים באתר הם של <a href="https://www.facebook.com/share/1FbjqLZnAA/" target="_blank" rel="noopener">זהר להט (הלוכדת הירוקה)</a>.</strong> תמונות מ־Wikimedia Commons מסומנות בקרדיט נפרד, ראו <a href="credits.html">קרדיטים ורישיונות</a> · <a href="privacy.html">מדיניות פרטיות</a>.
+  <strong>קרדיט: התמונות והסרטונים באתר הם של <a href="https://www.facebook.com/share/1FbjqLZnAA/" target="_blank" rel="noopener">זהר להט (הלוכדת הירוקה)</a>.</strong> · <a href="privacy.html">מדיניות פרטיות</a>
 </footer>
 
 </div>
 
 <script>
-// כל חידון = 20 שאלות: תמונות (pics) וסרטונים (vids). התשובה נקבעת לפי שם הקובץ (zefa = צפע, zaaman = זעמן).
+// כל חידון = 18 שאלות: תמונות (pics) וסרטונים (vids). התשובה נקבעת לפי שם הקובץ (zefa = צפע, zaaman = זעמן).
 // כל החידונים באותה רמה (בכל אחד תערובת של קל, בינוני וקשה). חידון 1: הסרטונים בשאלות הזוגיות. בשאר החידונים הסרטונים מפוזרים באופן שווה.
 // כדי להוסיף חידון: מוסיפים אובייקט לרשימה (והקבצים לתיקיות img/ ו-video/).
-// תמונות שלא משובצות באף חידון (שמורות לחידון הבא): zefa8-png, zaaman22-jpg, zaaman23-jpg, zaaman25-jpg
+// תמונות שלא משובצות באף חידון (שמורות לחידון הבא): zaaman21-jpg, zaaman22-jpg, zaaman23-jpg
 const QUIZZES = [
   { name: 'חידון 1', vidsEven: true,
-    pics: ['zefa1-jpg','zefa6-png','zefa2-jpg','zefa11-png','zefa3-jpg','zaaman5-png','zaaman1-jpg','zaaman3-jpg','zaaman4-jpg','zaaman3-png'],
-    vids: ['zefa-night','zefa-pine','zefa-gravel','zefa-bush','zefa-climbing','zaaman-carpet','zaaman-box','zaaman-cup','zaaman-escape','zaaman-crawl'] },
+    pics: ['zefa1-jpg','zefa6-png','zefa2-jpg','zefa11-png','zefa3-jpg','zaaman5-png','zaaman1-jpg','zaaman3-jpg','zaaman4-jpg'],
+    vids: ['zefa-night','zefa-pine','zefa-gravel','zefa-bush','zaaman-carpet','zaaman-box','zaaman-cup','zaaman-escape','zaaman-crawl'] },
   { name: 'חידון 2',
-    pics: ['zefa14-jpg','zefa15-jpg','zefa19-jpg','zefa4-png','zefa3-png','zefa5-png','zefa7-png','zaaman13-png','zaaman6-png','zaaman7-png','zaaman8-png','zaaman9-png','zaaman11-png','zaaman10-png','zaaman21-jpg'],
+    pics: ['zefa14-jpg','zefa15-jpg','zefa4-png','zefa3-png','zefa5-png','zefa7-png','zaaman13-png','zaaman6-png','zaaman7-png','zaaman8-png','zaaman9-png','zaaman11-png','zaaman10-png'],
     vids: ['zefa-head','zefa-bucket','zefa-moving','zaaman-fabric','zaaman-vanish'] },
   { name: 'חידון 3',
-    pics: ['zefa18-jpg','zefa17-jpg','zefa16-jpg','zefa9-png','zefa10-png','zefa12-png','zefa13-png','zaaman2-jpg','zaaman4-png','zaaman20-jpg','zaaman12-png','zaaman27-jpg','zaaman24-jpg','zaaman26-jpg','zaaman29-jpg'],
-    vids: ['zefa-box','zefa-white','zaaman-trans','zaaman-lid','zaaman-jar'] },
+    pics: ['zefa8-png','zefa9-png','zefa10-png','zefa12-png','zefa13-png','zaaman2-jpg','zaaman3-png','zaaman4-png','zaaman20-jpg','zaaman12-png','zaaman24-jpg','zaaman29-jpg'],
+    vids: ['zefa-climbing','zefa-box','zefa-white','zaaman-trans','zaaman-lid','zaaman-jar'] },
 ];
 const ans = f => f.startsWith('zefa') ? 'zefa' : 'zaaman';
 const CREDITS = {
  "zaaman29-jpg.jpg": {"by": "יערה כהן ווינקלר"},
- "zaaman26-jpg.jpg": {
-  "by": "أمين (Amin)",
-  "lic": "CC BY-SA 4.0",
-  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:Coluber_nummifer,_Palestine_001.jpg"
- },
- "zaaman27-jpg.jpg": {
-  "by": "יעקב",
-  "lic": "נחלת הכלל",
-  "licUrl": "https://commons.wikimedia.org/wiki/File:Snake_in_Jerusalem_area.JPG",
-  "page": "https://commons.wikimedia.org/wiki/File:Snake_in_Jerusalem_area.JPG"
- },
- "zefa16-jpg.jpg": {
-  "by": "ארבל לוי",
-  "lic": "CC BY-SA 4.0",
-  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_1.jpg"
- },
- "zefa17-jpg.jpg": {
-  "by": "ארבל לוי",
-  "lic": "CC BY-SA 4.0",
-  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_2.jpg"
- },
- "zefa18-jpg.jpg": {
-  "by": "ארבל לוי",
-  "lic": "CC BY-SA 4.0",
-  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_3.jpg"
- },
- "zefa19-jpg.jpg": {
-  "by": "ארבל לוי",
-  "lic": "CC BY-SA 4.0",
-  "licUrl": "https://creativecommons.org/licenses/by-sa/4.0",
-  "page": "https://commons.wikimedia.org/wiki/File:ArbeLevy-Vipera_palaestinae_4.jpg"
- },
 };
 const $ = id => document.getElementById(id);
 let order, idx, score, answered, cur;
@@ -422,7 +378,9 @@ function beep(ok) {
     else tone(190, t, .3, 'sawtooth', .16, 100);
   } catch (e) { /* בלי צליל */ }
 }
-const showSnd = () => { $('snd').textContent = soundOn ? 'צליל: פועל' : 'צליל: כבוי'; };
+const BELL = '<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
+const BELL_OFF = BELL.replace('</svg>', '<path d="M3 3l18 18" stroke-width="2.4"/></svg>');
+const showSnd = () => { const b = $('snd'); b.innerHTML = soundOn ? BELL : BELL_OFF; b.classList.toggle('off', !soundOn); b.setAttribute('aria-pressed', soundOn ? 'true' : 'false'); b.setAttribute('aria-label', soundOn ? 'צליל פועל, לחצו לכיבוי' : 'צליל כבוי, לחצו להפעלה'); b.title = soundOn ? 'צליל פועל' : 'צליל כבוי'; };
 $('snd').onclick = () => { soundOn = !soundOn; try { localStorage.setItem('snd', soundOn ? '1' : '0'); } catch (e) {} showSnd(); if (soundOn) beep(true); };
 showSnd();
 function answer(a) {
@@ -452,7 +410,7 @@ $('bZaaman').onclick = () => answer('zaaman');
 $('qnext').onclick = next;
 $('qagain').onclick = () => start(cur);
 // כשהאפליקציה מאושרת בחנות: למלא את הכתובת, והכפתור יהפוך לפעיל ("דרגו אותנו באפסטור").
-const RATE_URL = '';
+const RATE_URL = 'https://apps.apple.com/app/id6830615948?action=write-review';
 if (RATE_URL) { const r = $('rate'); r.disabled = false; r.textContent = 'דרגו אותנו באפסטור'; r.onclick = () => window.open(RATE_URL, '_blank'); }
 const shareUrl = () => location.href.split('#')[0];
 const shareText = () => `קיבלתי ${score} מתוך ${order.length} בחידון "האם זה נחש צפע?" נסו גם אתם`;
